@@ -1,4 +1,4 @@
-# DHLFix
+# DHL-iOS15-Fix
 
 A small tweak for the **Post & DHL** app (`de.deutschepost.dhl`) on **iOS 15**. It fixes the web-based parts of the app that otherwise keep showing *"Bereich wird geladen … Das Laden des Bereiches dauert etwas länger"* forever:
 
