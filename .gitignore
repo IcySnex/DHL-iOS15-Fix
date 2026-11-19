@@ -1,0 +1,6 @@
+.DS_Store
+/dump/
+/build/
+/captures/
+*.ipa
+*.flow
