@@ -4,3 +4,4 @@
 /captures/
 *.ipa
 *.flow
+node_modules/
