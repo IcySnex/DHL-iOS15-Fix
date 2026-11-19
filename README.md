@@ -78,3 +78,7 @@ node analyze.mjs /tmp/dhl-modules https://www.dhl.de/int-postfinder/webservice/s
 - Only class static blocks are lowered, because that is all DHL uses today. If DHL starts shipping other syntax that iOS 15 lacks, the tokenizer needs another rule. `tools/analyze.mjs` shows what is new. Missing runtime APIs (`Array.prototype.toSorted` and the like) are outside the scope of this tweak; [Polyfills](https://github.com/PoomSmart/Polyfills) covers many of them on jailbroken devices.
 - **Briefankündigung** still does not work on iOS 15. Newer iOS versions show a separate login sheet there, and that flow was not looked into.
 - Some DHL pages scroll horizontally on 320 pt wide screens.
+
+## License
+
+MIT, see [LICENSE](LICENSE).

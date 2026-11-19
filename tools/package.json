@@ -1,5 +1,6 @@
 {
   "name": "dhlfix-tools",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "dependencies": {
