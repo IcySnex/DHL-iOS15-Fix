@@ -1,4 +1,4 @@
-// macOS test driver: lower.c <in.js> <out.js>
+// macOS test driver for the static block lowering: lower <in.js> <out.js>
 #include "../src/DHLFixTransform.h"
 #include <stdio.h>
 #include <stdlib.h>

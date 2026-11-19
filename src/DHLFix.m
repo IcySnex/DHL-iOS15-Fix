@@ -26,9 +26,12 @@
 
 #define LOG(fmt, ...) NSLog(@"[DHLFix] " fmt, ##__VA_ARGS__)
 
-// Switches
-static const BOOL kDisablePinning = NO;    // only for mitmproxy sessions
-static const BOOL kLogWebViews    = YES;   // JS errors/console -> syslog (diagnostics)
+// `make DEBUG=1` also forwards JS errors/console output of dhl.de pages to the syslog.
+#ifdef DHLFIX_DEBUG
+static const BOOL kLogWebViews = YES;
+#else
+static const BOOL kLogWebViews = NO;
+#endif
 
 static NSString *const kScheme      = @"dhlfix";
 static NSString *const kSPAPrefix   = @"/int-static/pdapp/spa/";
@@ -376,24 +379,8 @@ static void hookWebKit(void) {
     }
 }
 
-#pragma mark - TrustKit (mitmproxy only)
-
-static void hookTrustKit(void) {
-    Class v = objc_getClass("TSKPinningValidator");
-    if (!v) { LOG(@"TSKPinningValidator not found"); return; }
-    hookInstance(v, NSSelectorFromString(@"evaluateTrust:forHostname:"),
-        ^NSInteger(id self, SecTrustRef trust, NSString *host) { return 2; });   // DomainNotPinned
-    hookInstance(v, NSSelectorFromString(@"handleChallenge:completionHandler:"),
-        ^BOOL(id self, NSURLAuthenticationChallenge *ch, void (^completion)(NSURLSessionAuthChallengeDisposition, NSURLCredential *)) {
-            completion(NSURLSessionAuthChallengePerformDefaultHandling, nil);
-            return YES;
-        });
-    LOG(@"pinning disabled");
-}
-
 __attribute__((constructor)) static void DHLFixInit(void) {
     LOG(@"loaded into %@ %@", NSBundle.mainBundle.bundleIdentifier,
         [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"]);
     hookWebKit();
-    if (kDisablePinning) hookTrustKit();
 }
