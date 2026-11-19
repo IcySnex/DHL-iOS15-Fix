@@ -14,7 +14,7 @@ Tested with Post & DHL **9.16.1 (1731)**, the last version that installs on iOS 
 
 ## Install
 
-1. Build `build/DHLFix.dylib` (see below) and copy it to the phone, for example with AirDrop.
+1. Download `DHLFix.dylib` from the [latest release](https://github.com/IcySnex/DHL-iOS15-Fix/releases/latest) (or build it yourself, see below) and copy it to the phone, for example with AirDrop.
 2. In TrollFools, pick **Post & DHL**, inject `DHLFix.dylib` and restart the app.
 
 ## Why the app breaks on iOS 15
@@ -57,6 +57,8 @@ make DEBUG=1    # also forwards JS errors/console of dhl.de pages to the syslog
 ```
 
 The dylib targets `arm64` with iOS 15.0 as the minimum. TrollFools signs it on injection.
+
+Pushing a tag like `v1.0.0` runs `.github/workflows/release.yml`, which tests, builds and publishes the dylib as a GitHub release.
 
 ## Debugging
 
